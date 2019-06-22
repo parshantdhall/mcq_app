@@ -9,7 +9,8 @@ module.exports.questionValidation = (req, res, next) => {
     options: Joi.array()
       .min(2)
       .required(),
-    rightOption: Joi.string().required()
+    rightOption: Joi.string().required(),
+    isChecked: Joi.boolean()
   };
   const { error } = Joi.validate(req.body, schema);
   if (error) {

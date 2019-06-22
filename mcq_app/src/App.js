@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import Header from './components/Header';
+import AdminPage from './components/AdminPage';
+import McqPage from './components/McqPage';
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    this.state = {
+      data: [],
+      isLoaded: false
+    };
+  }
+  // Fetching Data
+  async componentDidMount() {
+    // Initalize the state with data..
+    try {
+      const res = (await axios.get('/api/questions')).data;
+      this.setState({
+        data: res,
+        isLoaded: true
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  render() {
+    return (
+      <Router>
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path="/admin"
+            render={props => <AdminPage {...props} />}
+          />
+          <Route exact path="/" render={props => <McqPage {...props} />} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;

@@ -1,0 +1,51 @@
+// Variables
+@import './utils/variables';
+
+.header {
+  width: 100%;
+  position: relative;
+  background-color: $color-almost-white;
+  // border: 1px black dashed;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 1rem 1rem;
+}
+
+.navbar {
+  width: 100%;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.logo {
+  float: left;
+  font-size: 3rem;
+  text-align: center;
+  margin: 1.5rem;
+  color: $color-blue-light;
+}
+
+.nav__menu {
+  float: right;
+  list-style: none;
+  margin: 2rem;
+
+  &__item {
+    display: inline-block;
+    font-size: 2.1rem;
+    color: white;
+
+    &:not(:last-child) {
+      margin-right: 1.4rem;
+    }
+
+    a {
+      color: $color-pink-dark;
+    }
+  }
+}

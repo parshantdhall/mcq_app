@@ -12,6 +12,10 @@ const questionScehma = new mongoose.Schema({
   rightOption: {
     type: String,
     required: true
+  },
+  isChecked: {
+    type: Boolean,
+    default: false
   }
 });
 
