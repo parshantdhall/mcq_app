@@ -1,0 +1,17 @@
+{
+  "name": "sec_army_mcq_backend",
+  "version": "1.0.0",
+  "description": "It is the backend for MCQ app build for sec army",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Parshant Dhall",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^15.0.3",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.0"
+  }
+}
