@@ -1,30 +1,12 @@
 import React from 'react';
 import '../stylesheets/_AdminPage.scss';
+import TableQues from './TableQues';
 
 class AdminPage extends React.Component {
   render() {
-    const quesMarkUp = (
-      <tr className="ques-row">
-        <td>
-          <input type="checkbox" name="selectedQuestion" className="chk-box" />
-        </td>
-        <td>
-          This is the text ofdcsdvsdvsdvd dvsdvadv sdvsdv sdvsdvsdvsdv
-          sdvsdvsdvsdv dsvsdvsd text question
-        </td>
-        <td>
-          <ol>
-            <li>optioncscscscscscscscscscscscscsc </li>
-            <li>option aadasdcascascas</li>
-            <li>option scsacas</li>
-          </ol>
-        </td>
-        <td>This is the right option</td>
-        <td>
-          <button className="del-btn">X</button>
-        </td>
-      </tr>
-    );
+    const allQues = this.props.data.map(ques => (
+      <TableQues key={ques._id} {...ques} />
+    ));
     return (
       <table>
         <thead className="table-head">
@@ -36,10 +18,7 @@ class AdminPage extends React.Component {
             <th>Manage Question</th>
           </tr>
         </thead>
-        <tbody>
-          {quesMarkUp}
-          {quesMarkUp}
-        </tbody>
+        <tbody>{allQues}</tbody>
       </table>
     );
   }

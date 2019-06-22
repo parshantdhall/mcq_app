@@ -27,6 +27,7 @@ class App extends Component {
     }
   }
   render() {
+    console.log(this.state);
     return (
       <Router>
         <Header />
@@ -34,9 +35,13 @@ class App extends Component {
           <Route
             exact
             path="/admin"
-            render={props => <AdminPage {...props} />}
+            render={props => <AdminPage {...props} {...this.state} />}
           />
-          <Route exact path="/" render={props => <McqPage {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={props => <McqPage {...props} {...this.state} />}
+          />
         </Switch>
       </Router>
     );
