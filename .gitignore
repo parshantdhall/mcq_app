@@ -1,2 +1,26 @@
 /backend/node_modules
 /backend/*.env
+
+# React ignores
+
+# dependencies
+mcq_app/node_modules
+mcq_app/.pnp
+mcq_app/.pnp.js
+
+# testing
+mcq_app/coverage
+
+# production
+mcq_app/build
+
+# misc
+mcq_app/.DS_Store
+mcq_app/.env.local
+mcq_app/.env.development.local
+mcq_app/.env.test.local
+mcq_app/.env.production.local
+
+mcq_app/npm-debug.log*
+mcq_app/yarn-debug.log*
+mcq_app/yarn-error.log*
