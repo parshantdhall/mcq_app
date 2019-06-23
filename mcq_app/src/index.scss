@@ -16,3 +16,142 @@ body {
 a {
   text-decoration: none;
 }
+
+// Loader
+
+.loader-container {
+  width: 60%;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  text-align: center;
+}
+
+// .noInternetText {
+//   margin-top: 6rem;
+//   font-size: 1.5rem;
+//   letter-spacing: 2px;
+//   color: grey;
+//   visibility: hidden;
+// }
+
+// .visible {
+//   visibility: visible;
+// }
+
+.mul13 {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.m13s {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.75;
+}
+
+.m13c1 {
+  background-color: #68c3a3;
+  -webkit-animation: m13s1anim 2s infinite linear;
+  animation: m13s1anim 2s infinite linear;
+}
+
+.m13c2 {
+  background-color: #ec644b;
+  -webkit-animation: m13s2anim 2s infinite linear;
+  animation: m13s2anim 2s infinite linear;
+}
+
+@-webkit-keyframes m13s1anim {
+  0%,
+  100% {
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+  }
+  25% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+  50% {
+    -webkit-transform: translateX(15px);
+    transform: translateX(15px);
+  }
+  75% {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0.8;
+  }
+}
+
+@keyframes m13s1anim {
+  0%,
+  100% {
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+  }
+  25% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+  50% {
+    -webkit-transform: translateX(15px);
+    transform: translateX(15px);
+  }
+  75% {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0.8;
+  }
+}
+
+@-webkit-keyframes m13s2anim {
+  0%,
+  100% {
+    -webkit-transform: translateX(15px);
+    transform: translateX(15px);
+  }
+  25% {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0.8;
+  }
+  50% {
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+  }
+  75% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+}
+
+@keyframes m13s2anim {
+  0%,
+  100% {
+    -webkit-transform: translateX(15px);
+    transform: translateX(15px);
+  }
+  25% {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0.8;
+  }
+  50% {
+    -webkit-transform: translateX(-15px);
+    transform: translateX(-15px);
+  }
+  75% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.25;
+  }
+}

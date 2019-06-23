@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../stylesheets/_AddQuesForm.scss';
 export default class AddQuesForm extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,8 @@ export default class AddQuesForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-
+    // post to db
+    this.props.handlePosting(this.state);
     // resetting the state after submitting
     this.setState({
       questionText: '',
@@ -29,28 +30,28 @@ export default class AddQuesForm extends Component {
   };
 
   // Function to add option input
-  addOption(e) {
+  addOption = e => {
     const { options } = this.state;
     this.setState({
       options: [...options, '']
     });
-  }
+  };
 
   // Function to remove option input
-  removeOption(i) {
-    this.setState((prevState, props) => {
+  removeOption = i => {
+    this.setState(prevState => {
       prevState.options.splice(i, 1);
-      return { options: [...prevState.options] };
+      return { options: prevState.options };
     });
-  }
+  };
   // handling options
-  handleOptionInput(e) {
+  handleOptionInput = e => {
     const index = Number(e.target.name.split('-')[1]);
     let options = this.state.options.map((option, i) =>
       i === index ? e.target.value : option
     );
     this.setState({ options });
-  }
+  };
 
   render() {
     // creating option input
@@ -65,7 +66,12 @@ export default class AddQuesForm extends Component {
           placeholder="Add option"
           onChange={this.handleOptionInput}
         />
-        <button className="remove-option-btn">X</button>
+        <button
+          className="remove-option-btn"
+          onClick={this.removeOption.bind(null, i)}
+        >
+          X
+        </button>
       </div>
     ));
 
@@ -75,7 +81,7 @@ export default class AddQuesForm extends Component {
         onChange={this.handleChange}
         name="rightOption"
         required
-        className="select-right"
+        className="select-right-option"
         value={this.state.rightOption}
       >
         <option value="">None</option>
@@ -87,7 +93,11 @@ export default class AddQuesForm extends Component {
       </select>
     );
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form
+        className="add-form"
+        onSubmit={this.handleFormSubmit}
+        style={this.props.formStyle}
+      >
         <div className="form-div">
           <label>Question Text</label>
           <input
@@ -104,7 +114,7 @@ export default class AddQuesForm extends Component {
           onClick={this.addOption}
           className="add-option-btn"
         >
-          <i className="fas fa-plus" />
+          +
         </button>
         {rightOpt}
         <input type="submit" value="Submit" />

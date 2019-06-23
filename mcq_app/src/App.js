@@ -26,8 +26,51 @@ class App extends Component {
       console.error(err);
     }
   }
+
+  handlePosting = async postData => {
+    try {
+      const newques = (await axios.post('/api/questions', postData)).data;
+      // updating the data
+      this.setState(prevState => ({
+        data: [...prevState.data, newques]
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  handleChecking = async (postData, quesId) => {
+    // Set the isloaed to false to show loader while updating
+    this.setState({ isLoaded: false });
+    try {
+      const updatedQues = await axios.put(`/api/questions/${quesId}`, postData);
+      const prevDataIndex = this.state.data.findIndex(
+        ques => ques._id === quesId
+      );
+      this.setState(prevState => {
+        prevState.data.splice(prevDataIndex, 1, updatedQues.data);
+        return { data: prevState.data, isLoaded: true };
+      });
+    } catch (err) {
+      console.err(err);
+    }
+  };
+
+  handleDelQues = async quesId => {
+    // Set the isloaed to false to show loader while updating
+    this.setState({ isLoaded: false });
+    try {
+      await axios.delete(`/api/questions/${quesId}`);
+      const newData = (await axios.get('/api/questions')).data;
+      this.setState({
+        data: newData,
+        isLoaded: true
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   render() {
-    console.log(this.state);
     return (
       <Router>
         <Header />
@@ -35,12 +78,26 @@ class App extends Component {
           <Route
             exact
             path="/admin"
-            render={props => <AdminPage {...props} {...this.state} />}
+            render={props => (
+              <AdminPage
+                {...props}
+                {...this.state}
+                handlePosting={this.handlePosting}
+                handleChecking={this.handleChecking}
+                handleDelQues={this.handleDelQues}
+              />
+            )}
           />
           <Route
             exact
             path="/"
-            render={props => <McqPage {...props} {...this.state} />}
+            render={props => (
+              <McqPage
+                {...props}
+                filteredData={this.state.data.filter(val => val.isChecked)}
+                isLoaded={this.state.isLoaded}
+              />
+            )}
           />
         </Switch>
       </Router>
