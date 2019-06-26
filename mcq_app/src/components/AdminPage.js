@@ -30,9 +30,11 @@ class AdminPage extends React.Component {
     // if data not loaded yet then show only loader
     if (!this.props.isLoaded) {
       return (
-        <div className="mul13">
-          <div className="m13s m13c1" />
-          <div className="m13s m13c2" />
+        <div className="loader-container">
+          <div className="mul13">
+            <div className="m13s m13c1" />
+            <div className="m13s m13c2" />
+          </div>
         </div>
       );
     }

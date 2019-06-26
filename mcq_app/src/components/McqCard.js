@@ -12,7 +12,7 @@ export default class McqCard extends Component {
   handleSubmit = e => {
     e.preventDefault();
     // Check if the selected option is right and increment to next ques
-    this.props.incrementNextQues(this.props.ques.rightOption);
+    console.log('form submitted');
   };
 
   handleChange = e => {
@@ -25,7 +25,9 @@ export default class McqCard extends Component {
     return (
       <div className="ques-container" id={this.props.ques._id}>
         <div className="time-left">
-          <p>15:00</p>
+          <p>
+            {this.props.minutes} : {this.props.seconds}
+          </p>
         </div>
         <div className="ques-text">
           <p>
@@ -47,10 +49,22 @@ export default class McqCard extends Component {
               <label>{option}</label>
             </div>
           ))}
-          <div style={{ marginTop: '4rem' }}>
-            <input type="submit" className="submit-btn" />
-          </div>
+          {/* <div style={{ marginTop: '4rem' }}>
+            <input
+              type="submit"
+              className="submit-btn"
+            />
+          </div> */}
         </form>
+        <button
+          className="next-btn"
+          onClick={this.props.incrementNextQues.bind(
+            null,
+            this.state.selectedOption
+          )}
+        >
+          next
+        </button>
       </div>
     );
   }
