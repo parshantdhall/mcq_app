@@ -4,13 +4,16 @@ import axios from 'axios';
 import Header from './components/Header';
 import AdminPage from './components/AdminPage';
 import McqPage from './components/McqPage';
+import ResultPage from './components/ResultPage';
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       data: [],
-      isLoaded: false
+      isLoaded: false,
+      totalMarks: 0
     };
   }
   // Fetching Data
@@ -70,6 +73,10 @@ class App extends Component {
       console.error(err);
     }
   };
+
+  getTotalMarks = marks => {
+    this.setState({ totalMarks: marks });
+  };
   render() {
     return (
       <Router>
@@ -96,9 +103,18 @@ class App extends Component {
                 {...props}
                 filteredData={this.state.data.filter(val => val.isChecked)}
                 isLoaded={this.state.isLoaded}
+                getTotalMarks={this.getTotalMarks}
               />
             )}
           />
+          <Route
+            path="/result"
+            render={props => (
+              <ResultPage {...props} totalMarks={this.state.totalMarks} />
+            )}
+          />
+          {/* 404 Route */}
+          <Route render={() => <h1>404 page not found...</h1>} />
         </Switch>
       </Router>
     );

@@ -5,6 +5,11 @@
   margin-top: 2rem;
 }
 
+.McqPage-heading {
+  font-size: 5rem;
+  letter-spacing: 4px;
+  color: $color-grey-dark;
+}
 .ques-container {
   width: 80%;
   position: relative;
@@ -86,4 +91,18 @@ label {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
+}
+
+// next btn
+.next-btn {
+  display: initial;
+  padding: 1.2rem 3rem;
+  font-size: 1.5rem;
+  background-color: $color-blue-md;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  margin-top: 2rem;
 }

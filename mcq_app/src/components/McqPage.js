@@ -2,16 +2,18 @@ import React, { PureComponent } from 'react';
 import '../stylesheets/_McqPage.scss';
 import McqCard from './McqCard';
 import { Redirect } from 'react-router-dom';
+
 class McqPage extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       nextQues: 0,
-      minTime: 2,
-      secTime: 60
+      marks: 0,
+      minTime: 1,
+      secTime: 60,
+      toResultPage: false
     };
-    this.marks = 0;
   }
 
   incrementNextQues = correctOption => {
@@ -19,7 +21,9 @@ class McqPage extends PureComponent {
     if (
       correctOption === this.props.filteredData[this.state.nextQues].rightOption
     ) {
-      this.marks = this.marks + 1;
+      this.setState(prevState => ({
+        marks: prevState.marks + 1
+      }));
     }
     // check if there's next question by checking the length
     if (this.state.nextQues < this.props.filteredData.length - 1) {
@@ -27,16 +31,18 @@ class McqPage extends PureComponent {
         nextQues: prevState.nextQues + 1
       }));
     } else {
-      console.log('Done');
       // redirect to result page with total marks
       this.goToResult();
     }
   };
 
   goToResult = () => {
-    alert('Total Marks---' + this.marks);
-    // pass the total marks as props
-    return <Redirect to="/result" />;
+    // Sending total marks to result page
+    this.props.getTotalMarks(this.state.marks);
+    // set the result page to true
+    this.setState({
+      toResultPage: true
+    });
   };
 
   render() {
@@ -62,6 +68,11 @@ class McqPage extends PureComponent {
           </div>
         </div>
       );
+    }
+
+    // redirecting to result page
+    if (this.state.toResultPage) {
+      return <Redirect to="/result" />;
     }
 
     return (

@@ -25,7 +25,7 @@ export default class McqCard extends Component {
     return (
       <div className="ques-container" id={this.props.ques._id}>
         <div className="time-left">
-          <p>
+          <p style={{ fontVariantNumeric: 'tabular-nums' }}>
             {this.props.minutes} : {this.props.seconds}
           </p>
         </div>
@@ -49,12 +49,6 @@ export default class McqCard extends Component {
               <label>{option}</label>
             </div>
           ))}
-          {/* <div style={{ marginTop: '4rem' }}>
-            <input
-              type="submit"
-              className="submit-btn"
-            />
-          </div> */}
         </form>
         <button
           className="next-btn"
