@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../stylesheets/_AddQuesForm.scss';
+import '../../../stylesheets/_AddQuesForm.scss';
 export default class AddQuesForm extends Component {
   constructor(props) {
     super(props);

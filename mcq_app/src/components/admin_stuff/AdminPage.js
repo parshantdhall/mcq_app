@@ -1,7 +1,7 @@
 import React from 'react';
-import '../stylesheets/_AdminPage.scss';
-import TableQues from './TableQues';
-import AddQuesForm from './AddQuesForm';
+import '../../stylesheets/_AdminPage.scss';
+import TableQues from './single_components/TableQues';
+import AddQuesForm from './single_components/AddQuesForm';
 
 class AdminPage extends React.Component {
   constructor(props) {

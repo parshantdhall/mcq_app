@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import Header from './components/Header';
-import AdminPage from './components/AdminPage';
-import McqPage from './components/McqPage';
-import ResultPage from './components/ResultPage';
+import Header from './components/layout/Header';
+import AdminPage from './components/admin_stuff/AdminPage';
+import McqPage from './components/pages/McqPage';
+import ResultPage from './components/pages/ResultPage';
 
 class App extends Component {
   constructor(props) {
@@ -47,9 +47,11 @@ class App extends Component {
     this.setState({ isLoaded: false });
     try {
       const updatedQues = await axios.put(`/api/questions/${quesId}`, postData);
+      // Finding the updated ques in the state
       const prevDataIndex = this.state.data.findIndex(
         ques => ques._id === quesId
       );
+      // Replacing the prevQues with updated one
       this.setState(prevState => {
         prevState.data.splice(prevDataIndex, 1, updatedQues.data);
         return { data: prevState.data, isLoaded: true };

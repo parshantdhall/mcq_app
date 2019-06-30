@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import '../stylesheets/_McqPage.scss';
-import McqCard from './McqCard';
+import '../../stylesheets/_McqPage.scss';
+import McqCard from '../single_components/McqCard';
 import { Redirect } from 'react-router-dom';
 
 class McqPage extends PureComponent {
