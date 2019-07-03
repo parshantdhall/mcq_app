@@ -5,7 +5,7 @@ import Header from './components/layout/Header';
 import AdminPage from './components/admin_stuff/AdminPage';
 import McqPage from './components/pages/McqPage';
 import ResultPage from './components/pages/ResultPage';
-
+import HomePage from './components/pages/HomePage';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -79,11 +79,33 @@ class App extends Component {
   getTotalMarks = marks => {
     this.setState({ totalMarks: marks });
   };
+
+  // Function to shuffle array
+  shuffle = arr => {
+    var arrLength = arr.length,
+      temp,
+      index;
+
+    // While there are elements in the array
+    while (arrLength > 0) {
+      // Pick a random index
+      index = Math.floor(Math.random() * arrLength);
+      // Decrease arrLength by 1
+      arrLength--;
+      // And swap the last element with it
+      temp = arr[arrLength];
+      arr[arrLength] = arr[index];
+      arr[index] = temp;
+    }
+    return arr;
+  };
+
   render() {
     return (
       <Router>
         <Header />
         <Switch>
+          <Route exact path="/" render={props => <HomePage {...props} />} />
           <Route
             exact
             path="/admin"
@@ -99,11 +121,13 @@ class App extends Component {
           />
           <Route
             exact
-            path="/"
+            path="/mcq"
             render={props => (
               <McqPage
                 {...props}
-                filteredData={this.state.data.filter(val => val.isChecked)}
+                filteredData={this.shuffle(
+                  this.state.data.filter(val => val.isChecked)
+                )}
                 isLoaded={this.state.isLoaded}
                 getTotalMarks={this.getTotalMarks}
               />
@@ -116,7 +140,7 @@ class App extends Component {
             )}
           />
           {/* 404 Route */}
-          <Route render={() => <h1>404 page not found...</h1>} />
+          <Route path="*" render={() => <h1>404 page not found...</h1>} />
         </Switch>
       </Router>
     );

@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import '../../stylesheets/_McqPage.scss';
-import McqCard from '../single_components/McqCard';
-import { Redirect } from 'react-router-dom';
+import React, { PureComponent } from "react";
+import "../../stylesheets/_McqPage.scss";
+import McqCard from "../single_components/McqCard";
+import { Redirect } from "react-router-dom";
 
 class McqPage extends PureComponent {
   constructor(props) {
@@ -10,7 +10,7 @@ class McqPage extends PureComponent {
     this.state = {
       nextQues: 0,
       marks: 0,
-      minTime: 1,
+      minTime: 15,
       secTime: 60,
       toResultPage: false
     };
@@ -55,6 +55,7 @@ class McqPage extends PureComponent {
         minutes={this.state.minTime}
         seconds={this.state.secTime}
         incrementNextQues={this.incrementNextQues}
+        totalQuestions={this.props.filteredData.length}
       />
     ));
 
@@ -73,6 +74,15 @@ class McqPage extends PureComponent {
     // redirecting to result page
     if (this.state.toResultPage) {
       return <Redirect to="/result" />;
+    }
+
+    // if there is no questions
+    if (this.props.filteredData.length === 0) {
+      return (
+        <center style={{ marginTop: "4rem" }}>
+          <h1>No data Found...</h1>
+        </center>
+      );
     }
 
     return (

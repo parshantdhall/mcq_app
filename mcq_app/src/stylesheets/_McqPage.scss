@@ -1,4 +1,4 @@
-@import './utils/variables';
+@import "./utils/variables";
 
 .McqPage {
   text-align: center;
@@ -23,34 +23,40 @@
   text-align: right;
   font-size: 1.7rem;
   font-weight: 600;
+  display: inline-block;
+  width: 50%;
 }
 .ques-text {
   font-size: 2rem;
-  margin: 2rem;
+  margin: 2rem auto;
+  text-align: center;
+  width: 80%;
 
   span {
     color: $color-grey;
   }
 }
 
-.radio-container {
-  margin: 1rem 0;
-}
-
+// option style
 .option-container {
   padding: 0;
   margin: 0;
   border: none;
 }
 
-.submit-btn {
-  padding: 1.4rem 2rem;
-  background-color: $color-pink-dark;
-  border: none;
-  outline: none;
-  border-radius: 0 1rem 0 1rem;
-  cursor: pointer;
-  color: white;
+.radio-container {
+  margin: 1rem auto;
+  width: 60%;
+  text-align: left;
+  padding: 1rem;
+  // border: 2px solid $color-pink-dark;
+  border-radius: 1rem;
+  box-shadow: 0 3px 0.6rem rgba($color-black, 0.3);
+  transition: 0.3s ease all;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
 // radio button style
@@ -68,15 +74,15 @@
   border: 0;
   border-radius: 50px;
   cursor: pointer;
-  margin-right: 7px;
+  margin: 7px;
   outline: none;
 }
 .form-radio:checked::before {
   position: absolute;
-  font: 13px/1 'Open Sans', sans-serif;
+  font: 13px/1 "Open Sans", sans-serif;
   left: 11px;
   top: 7px;
-  content: '\02143';
+  content: "\02143";
   transform: rotate(40deg);
 }
 .form-radio:hover {
@@ -86,11 +92,10 @@
   background-color: #f1f1f1;
 }
 label {
-  font: 15px/1.7 'Open Sans', sans-serif;
+  font-size: 1.5rem;
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: pointer;
 }
 
 // next btn
@@ -105,4 +110,13 @@ label {
   border-radius: 2rem;
   cursor: pointer;
   margin-top: 2rem;
+}
+
+// CurrentQues / Total Ques
+.current-ques {
+  text-align: left;
+  font-size: 1.7rem;
+  font-weight: 600;
+  display: inline-block;
+  width: 50%;
 }

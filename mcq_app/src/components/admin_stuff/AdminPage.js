@@ -1,7 +1,7 @@
-import React from 'react';
-import '../../stylesheets/_AdminPage.scss';
-import TableQues from './single_components/TableQues';
-import AddQuesForm from './single_components/AddQuesForm';
+import React from "react";
+import "../../stylesheets/_AdminPage.scss";
+import TableQues from "./single_components/TableQues";
+import AddQuesForm from "./single_components/AddQuesForm";
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -43,9 +43,27 @@ class AdminPage extends React.Component {
     // Hiding and showing the form
     if (this.state.isFormShowing) {
       formStyle = {
-        transform: 'translateX(0)',
-        opacity: '1'
+        transform: "translateX(0)",
+        opacity: "1"
       };
+    }
+
+    // if there is no data in the database..
+    if (this.props.data.length === 0) {
+      return (
+        <div>
+          <center style={{ marginTop: "4rem" }}>
+            <h1>No data Found...</h1>
+          </center>
+          <div className="float-btn" onClick={this.toggleForm}>
+            +
+          </div>
+          <AddQuesForm
+            handlePosting={this.props.handlePosting}
+            formStyle={formStyle}
+          />
+        </div>
+      );
     }
 
     return (

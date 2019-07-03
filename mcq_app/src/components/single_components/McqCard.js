@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class McqCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedOption: ''
+      selectedOption: ""
     };
   }
 
   handleSubmit = e => {
     e.preventDefault();
     // Check if the selected option is right and increment to next ques
-    console.log('form submitted');
+    console.log("form submitted");
   };
 
   handleChange = e => {
@@ -24,8 +24,13 @@ export default class McqCard extends Component {
   render() {
     return (
       <div className="ques-container" id={this.props.ques._id}>
+        <div className="current-ques">
+          <p>
+            {this.props.i + 1} / {this.props.totalQuestions}
+          </p>
+        </div>
         <div className="time-left">
-          <p style={{ fontVariantNumeric: 'tabular-nums' }}>
+          <p style={{ fontVariantNumeric: "tabular-nums" }}>
             {this.props.minutes} : {this.props.seconds}
           </p>
         </div>
@@ -46,7 +51,9 @@ export default class McqCard extends Component {
                 checked={this.state.selectedOption === option}
                 onChange={this.handleChange}
               />
-              <label>{option}</label>
+              <div>
+                <label>{option}</label>
+              </div>
             </div>
           ))}
         </form>
