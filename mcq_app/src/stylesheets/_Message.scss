@@ -1,0 +1,18 @@
+@import "./utils/variables";
+// Notify Message
+.notify-msg {
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: $color-grey-dark;
+  color: $color-almost-white;
+  font-size: 2rem;
+  max-width: 25%;
+  text-align: center;
+  transition: 0.5s all ease;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  z-index: 9999;
+  transform: translateX(-50%) translateY(-150%);
+}

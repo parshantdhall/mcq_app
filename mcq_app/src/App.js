@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
-import Header from './components/layout/Header';
-import AdminPage from './components/admin_stuff/AdminPage';
-import McqPage from './components/pages/McqPage';
-import ResultPage from './components/pages/ResultPage';
-import HomePage from './components/pages/HomePage';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import axios from "axios";
+import Header from "./components/layout/Header";
+import AdminPage from "./components/admin_stuff/AdminPage";
+import McqPage from "./components/pages/McqPage";
+import ResultPage from "./components/pages/ResultPage";
+import HomePage from "./components/pages/HomePage";
+import AddQuesForm from "./components/admin_stuff/single_components/AddQuesForm";
+import Message from "./components/single_components/Message";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,14 +16,16 @@ class App extends Component {
     this.state = {
       data: [],
       isLoaded: false,
-      totalMarks: 0
+      totalMarks: 0,
+      messageText: "",
+      isMessageShowing: false
     };
   }
   // Fetching Data
   async componentDidMount() {
     // Initalize the state with data..
     try {
-      const res = (await axios.get('/api/questions')).data;
+      const res = (await axios.get("/api/questions")).data;
       this.setState({
         data: res,
         isLoaded: true
@@ -32,13 +37,15 @@ class App extends Component {
 
   handlePosting = async postData => {
     try {
-      const newques = (await axios.post('/api/questions', postData)).data;
+      const newques = (await axios.post("/api/questions", postData)).data;
       // updating the data
       this.setState(prevState => ({
         data: [...prevState.data, newques]
       }));
+      return true;
     } catch (err) {
       console.error(err);
+      return false;
     }
   };
 
@@ -56,8 +63,10 @@ class App extends Component {
         prevState.data.splice(prevDataIndex, 1, updatedQues.data);
         return { data: prevState.data, isLoaded: true };
       });
+      return true;
     } catch (err) {
       console.err(err);
+      return false;
     }
   };
 
@@ -66,13 +75,15 @@ class App extends Component {
     this.setState({ isLoaded: false });
     try {
       await axios.delete(`/api/questions/${quesId}`);
-      const newData = (await axios.get('/api/questions')).data;
+      const newData = (await axios.get("/api/questions")).data;
       this.setState({
         data: newData,
         isLoaded: true
       });
+      return true;
     } catch (err) {
       console.error(err);
+      return false;
     }
   };
 
@@ -100,10 +111,33 @@ class App extends Component {
     return arr;
   };
 
+  // notifying messages
+  notify = msg => {
+    this.setState(prevState => ({
+      isMessageShowing: !prevState.isMessageShowing,
+      messageText: msg
+    }));
+    setTimeout(() => {
+      this.setState(prevState => ({
+        isMessageShowing: !prevState.isMessageShowing,
+        messageText: ""
+      }));
+    }, 1500);
+  };
+
   render() {
+    // message style settings..
+    let msgStyle;
+    if (this.state.isMessageShowing) {
+      msgStyle = {
+        opacity: "1",
+        transform: "translateX(-50%) translateY(50px)"
+      };
+    }
     return (
       <Router>
         <Header />
+        <Message messageText={this.state.messageText} msgStyle={msgStyle} />
         <Switch>
           <Route exact path="/" render={props => <HomePage {...props} />} />
           <Route
@@ -113,9 +147,9 @@ class App extends Component {
               <AdminPage
                 {...props}
                 {...this.state}
-                handlePosting={this.handlePosting}
                 handleChecking={this.handleChecking}
                 handleDelQues={this.handleDelQues}
+                notify={this.notify}
               />
             )}
           />
@@ -137,6 +171,16 @@ class App extends Component {
             path="/result"
             render={props => (
               <ResultPage {...props} totalMarks={this.state.totalMarks} />
+            )}
+          />
+          <Route
+            path="/admin/addquestion"
+            render={props => (
+              <AddQuesForm
+                {...props}
+                handlePosting={this.handlePosting}
+                notify={this.notify}
+              />
             )}
           />
           {/* 404 Route */}

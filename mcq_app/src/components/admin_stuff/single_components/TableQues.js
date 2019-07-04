@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class TableQues extends React.Component {
   constructor(props) {
@@ -22,13 +22,20 @@ class TableQues extends React.Component {
       rightOption,
       isChecked: this.state.isChecked
     };
-    this.props.handleChecking(postData, _id);
+    this.props.handleChecking(postData, _id)
+      ? this.props.notify("Mcq Added")
+      : this.props.notify("Err an Error occured!");
   };
 
   delQues = () => {
     // It will first confirm if user wants to del ques
-    if (window.confirm('Really 😒')) {
-      this.props.handleDelQues(this.props._id);
+    if (window.confirm("Really 😒")) {
+      const isDeleted = this.props.handleDelQues(this.props._id);
+      if (isDeleted) {
+        this.props.notify("Deletion Successful");
+      } else {
+        this.props.notify("Errr An error Occured!");
+      }
     } else {
       return;
     }
@@ -54,12 +61,15 @@ class TableQues extends React.Component {
         </td>
         <td>{this.props.questionText}</td>
         <td>
-          <ul style={{ listStyle: 'none' }}>{options}</ul>
+          <ul style={{ listStyle: "none" }}>{options}</ul>
         </td>
         <td>{this.props.rightOption}</td>
         <td>
           <button className="del-btn" onClick={this.delQues}>
             X
+          </button>
+          <button className="del-btn" onClick={this.delQues}>
+            edit
           </button>
         </td>
       </tr>

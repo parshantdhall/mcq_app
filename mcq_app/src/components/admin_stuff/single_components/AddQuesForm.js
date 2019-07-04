@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import '../../../stylesheets/_AddQuesForm.scss';
+import React, { Component } from "react";
+import "../../../stylesheets/_AddQuesForm.scss";
 export default class AddQuesForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      questionText: '',
-      options: [''],
-      rightOption: 'none'
+      questionText: "",
+      options: [""],
+      rightOption: "none"
     };
   }
 
@@ -23,17 +23,19 @@ export default class AddQuesForm extends Component {
     this.props.handlePosting(this.state);
     // resetting the state after submitting
     this.setState({
-      questionText: '',
-      options: [''],
-      rightOption: 'none'
+      questionText: "",
+      options: [""],
+      rightOption: "none"
     });
+    // Notification
+    this.props.notify("Question Added Successfully..");
   };
 
   // Function to add option input
   addOption = e => {
     const { options } = this.state;
     this.setState({
-      options: [...options, '']
+      options: [...options, ""]
     });
   };
 
@@ -46,7 +48,7 @@ export default class AddQuesForm extends Component {
   };
   // handling options
   handleOptionInput = e => {
-    const index = Number(e.target.name.split('-')[1]);
+    const index = Number(e.target.name.split("-")[1]);
     let options = this.state.options.map((option, i) =>
       i === index ? e.target.value : option
     );
@@ -58,7 +60,7 @@ export default class AddQuesForm extends Component {
     const optionInput = this.state.options.map((option, i) => (
       <div key={`option-${i}`} className="form-div">
         <label>Option: {i + 1} </label>
-        <input
+        <textarea
           name={`option-${i}`}
           type="text"
           value={option}
@@ -81,7 +83,6 @@ export default class AddQuesForm extends Component {
         onChange={this.handleChange}
         name="rightOption"
         required
-        className="select-right-option"
         value={this.state.rightOption}
       >
         <option value="">None</option>
@@ -92,12 +93,10 @@ export default class AddQuesForm extends Component {
         ))}
       </select>
     );
+
+    // Return state starts...
     return (
-      <form
-        className="add-form"
-        onSubmit={this.handleFormSubmit}
-        style={this.props.formStyle}
-      >
+      <form className="add-form" onSubmit={this.handleFormSubmit}>
         <div className="form-div">
           <label>Question Text</label>
           <input
@@ -116,7 +115,10 @@ export default class AddQuesForm extends Component {
         >
           +
         </button>
-        {rightOpt}
+        <div className="select-right-option">
+          <label>Select Right Option</label>
+          {rightOpt}
+        </div>
         <input type="submit" value="Submit" />
       </form>
     );

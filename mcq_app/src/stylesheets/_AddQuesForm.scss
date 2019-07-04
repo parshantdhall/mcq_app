@@ -1,36 +1,43 @@
-@import './utils/variables';
+@import "./utils/variables";
 
 .add-form {
   padding: 2rem;
   margin: 2rem;
-  border: 1px solid;
+  // border: 1px solid;
   text-align: center;
-  position: fixed;
-  top: 25%;
-  right: 0;
-  background-color: $color-blue-md;
-  opacity: 0;
-  transform: translateX(110%);
-  transition: all 0.6s ease;
 }
 .form-div {
-  margin: 1rem;
   padding: 1rem;
 
   label {
     font-size: 2rem;
-    margin-right: 6px;
+    display: block;
   }
 
   input {
-    &[name='questionText'] {
-      font-size: 2.2rem;
-      padding: 0.6rem 2rem;
+    border: none;
+    border-bottom: 2px solid $color-blue-light;
+    outline: none;
+    font-size: 2.2rem;
+    padding: 0.6rem 2rem;
+    transition: all 0.4s ease;
+    width: 70%;
+
+    &:focus {
+      border-bottom: 2px solid $color-yellow;
     }
-    &[name^='option-'] {
-      font-size: 2rem;
-      padding: 0.6rem 1rem;
-      transition: all 2s ease;
+  }
+
+  textarea {
+    width: 50%;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-color: $color-blue-light;
+    outline: none;
+    border-radius: 2rem;
+
+    &:focus {
+      border-color: $color-yellow;
     }
   }
 }
@@ -48,16 +55,45 @@
 
 .remove-option-btn {
   background-color: $color-blue-light;
-  font-size: 2rem;
-  margin-left: 1rem;
+  font-size: 1.3rem;
+  margin-left: 0.4rem;
   padding: 1rem 1.5rem;
   border-radius: 50%;
   border: none;
   cursor: pointer;
   outline: none;
+
+  &:hover {
+    background-color: tomato;
+  }
 }
 
 .select-right-option {
-  display: block;
-  padding: 1rem;
+  margin: 4rem auto;
+  width: 20%;
+  select {
+    padding: 1rem 2rem;
+    display: block;
+    margin: 1rem auto;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+  }
+}
+
+input[type="submit"] {
+  padding: 1.5rem 3rem;
+  background-color: $color-blue-light;
+  outline: none;
+  border: none;
+  border-radius: 3rem;
+  font-size: 2rem;
+  color: whitesmoke;
+  cursor: pointer;
+  transition: 0.4s ease all;
+
+  &:hover {
+    background-color: $color-yellow;
+    color: $color-grey-dark;
+  }
 }

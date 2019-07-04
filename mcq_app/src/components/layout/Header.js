@@ -1,6 +1,6 @@
-import React from 'react';
-import '../../stylesheets/_Header.scss';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "../../stylesheets/_Header.scss";
+import { Link } from "react-router-dom";
 
 const Header = props => {
   return (

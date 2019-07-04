@@ -1,5 +1,5 @@
 // Variables
-@import './utils/variables';
+@import "./utils/variables";
 
 .header {
   width: 100%;
@@ -13,10 +13,10 @@
 .navbar {
   width: 100%;
   position: relative;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 
   &::after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
   }

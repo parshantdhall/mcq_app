@@ -1,22 +1,12 @@
 import React from "react";
 import "../../stylesheets/_AdminPage.scss";
 import TableQues from "./single_components/TableQues";
-import AddQuesForm from "./single_components/AddQuesForm";
+import { Link } from "react-router-dom";
 
 class AdminPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isFormShowing: false
-    };
-  }
-
-  toggleForm = () => {
-    this.setState(prevState => ({
-      isFormShowing: !prevState.isFormShowing
-    }));
-  };
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const allQues = this.props.data.map(ques => (
@@ -25,6 +15,7 @@ class AdminPage extends React.Component {
         {...ques}
         handleChecking={this.props.handleChecking}
         handleDelQues={this.props.handleDelQues}
+        notify={this.props.notify}
       />
     ));
     // if data not loaded yet then show only loader
@@ -39,15 +30,6 @@ class AdminPage extends React.Component {
       );
     }
 
-    let formStyle;
-    // Hiding and showing the form
-    if (this.state.isFormShowing) {
-      formStyle = {
-        transform: "translateX(0)",
-        opacity: "1"
-      };
-    }
-
     // if there is no data in the database..
     if (this.props.data.length === 0) {
       return (
@@ -55,13 +37,9 @@ class AdminPage extends React.Component {
           <center style={{ marginTop: "4rem" }}>
             <h1>No data Found...</h1>
           </center>
-          <div className="float-btn" onClick={this.toggleForm}>
+          <Link to="/admin/addquestion" className="float-btn">
             +
-          </div>
-          <AddQuesForm
-            handlePosting={this.props.handlePosting}
-            formStyle={formStyle}
-          />
+          </Link>
         </div>
       );
     }
@@ -80,13 +58,9 @@ class AdminPage extends React.Component {
           </thead>
           <tbody>{allQues}</tbody>
         </table>
-        <div className="float-btn" onClick={this.toggleForm}>
+        <Link to="/admin/addquestion" className="float-btn">
           +
-        </div>
-        <AddQuesForm
-          handlePosting={this.props.handlePosting}
-          formStyle={formStyle}
-        />
+        </Link>
       </div>
     );
   }
