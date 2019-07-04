@@ -4,16 +4,13 @@ import TableQues from "./single_components/TableQues";
 import { Link } from "react-router-dom";
 
 class AdminPage extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   render() {
     const allQues = this.props.data.map(ques => (
       <TableQues
         key={ques._id}
         {...ques}
-        handleChecking={this.props.handleChecking}
+        history={this.props.history}
+        handleUpdation={this.props.handleUpdation}
         handleDelQues={this.props.handleDelQues}
         notify={this.props.notify}
       />

@@ -22,7 +22,7 @@ class TableQues extends React.Component {
       rightOption,
       isChecked: this.state.isChecked
     };
-    this.props.handleChecking(postData, _id)
+    this.props.handleUpdation(postData, _id)
       ? this.props.notify("Mcq Added")
       : this.props.notify("Err an Error occured!");
   };
@@ -39,6 +39,17 @@ class TableQues extends React.Component {
     } else {
       return;
     }
+  };
+
+  editQues = () => {
+    // go to edit page with ques data..
+    const { _id, options, questionText, rightOption, isChecked } = this.props;
+    const quesData = { _id, options, questionText, rightOption, isChecked };
+
+    this.props.history.push({
+      pathname: `/admin/editquestion/${this.props._id}`,
+      state: { data: quesData }
+    });
   };
 
   render() {
@@ -68,7 +79,7 @@ class TableQues extends React.Component {
           <button className="del-btn" onClick={this.delQues}>
             X
           </button>
-          <button className="del-btn" onClick={this.delQues}>
+          <button className="del-btn" onClick={this.editQues}>
             edit
           </button>
         </td>

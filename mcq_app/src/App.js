@@ -7,6 +7,7 @@ import McqPage from "./components/pages/McqPage";
 import ResultPage from "./components/pages/ResultPage";
 import HomePage from "./components/pages/HomePage";
 import AddQuesForm from "./components/admin_stuff/single_components/AddQuesForm";
+import EditQuesForm from "./components/admin_stuff/single_components/EditQuesForm";
 import Message from "./components/single_components/Message";
 
 class App extends Component {
@@ -49,7 +50,8 @@ class App extends Component {
     }
   };
 
-  handleChecking = async (postData, quesId) => {
+  // handling updation of question (checking/editing question)
+  handleUpdation = async (postData, quesId) => {
     // Set the isloaed to false to show loader while updating
     this.setState({ isLoaded: false });
     try {
@@ -131,7 +133,7 @@ class App extends Component {
     if (this.state.isMessageShowing) {
       msgStyle = {
         opacity: "1",
-        transform: "translateX(-50%) translateY(50px)"
+        transform: "translateX(-50%) translateY(0)"
       };
     }
     return (
@@ -147,7 +149,7 @@ class App extends Component {
               <AdminPage
                 {...props}
                 {...this.state}
-                handleChecking={this.handleChecking}
+                handleUpdation={this.handleUpdation}
                 handleDelQues={this.handleDelQues}
                 notify={this.notify}
               />
@@ -179,6 +181,16 @@ class App extends Component {
               <AddQuesForm
                 {...props}
                 handlePosting={this.handlePosting}
+                notify={this.notify}
+              />
+            )}
+          />
+          <Route
+            path="/admin/editquestion/:id"
+            render={props => (
+              <EditQuesForm
+                {...props}
+                handleUpdation={this.handleUpdation}
                 notify={this.notify}
               />
             )}
